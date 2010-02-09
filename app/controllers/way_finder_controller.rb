@@ -1,5 +1,5 @@
-class WayFinderController < ApplicationController
+class WayFinderController < 
 	def find_way
-		render :text => find_best_way
+		render :text => RAILS_ROOT
 	end
 end
