@@ -1,6 +1,6 @@
 class WayFinderController < ApplicationController
-	require "#{RAILS_ROOT}/lib/portovias.rb"
+	#require "#{RAILS_ROOT}/lib/portovias.rb"
 	def find_way
-		render :text => RAILS_ROOT
+		render :text => `ls #{RAILS_ROOT}\\vendor` 
 	end
 end
