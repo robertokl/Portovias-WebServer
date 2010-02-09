@@ -5,7 +5,7 @@ class WayFinderController < ApplicationController
 		ways = find_best_way
 		ways.keys.each do |key|
 			html << "<h4>#{key}</h4>"
-			html << "<br>#{ways[key][1]}: #{ways[key][0]}<p/>"
+			html << "#{ways[key][1]}: #{ways[key][0]}<p/>"
 		end
 		render :text => html
 	end
