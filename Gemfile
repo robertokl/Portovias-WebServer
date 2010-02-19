@@ -1,1 +1,1 @@
-mechanize --version "=1.0.0"
+mechanize --version "1.0.0"
