@@ -131,3 +131,38 @@
     /usr/lib/ruby/1.9.0/webrick/httpserver.rb:111:in `service'
     /usr/lib/ruby/1.9.0/webrick/httpserver.rb:70:in `run'
     /usr/lib/ruby/1.9.0/webrick/server.rb:183:in `block in start_thread'
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-19 17:22:56) [GET]
+
+ActionController::RoutingError (No route matches "/way_finder/find_way.txt" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+
+
+Processing WayFinderController#find_way (for 127.0.0.1 at 2010-02-19 17:23:18) [GET]
+
+NameError (uninitialized constant Mime::TXT):
+  app/controllers/way_finder_controller.rb:13:in `find_way'
+  app/controllers/way_finder_controller.rb:6:in `find_way'
+
+Rendered rescues/_trace (44.4ms)
+Rendered rescues/_request_and_response (20.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing WayFinderController#find_way (for 127.0.0.1 at 2010-02-19 17:23:51) [GET]
+Completed in 5427ms (View: 1, DB: 0) | 200 OK [http://localhost/way_finder/find_way]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-19 17:23:59) [GET]
+
+ActionController::RoutingError (No route matches "/way_finder/find_way.xml" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+
+
+Processing WayFinderController#find_way to xml (for 127.0.0.1 at 2010-02-19 17:24:41) [GET]
+Completed in 4647ms (View: 1, DB: 0) | 200 OK [http://localhost/way_finder/find_way.xml]
