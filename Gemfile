@@ -1,1 +1,1 @@
-mechanize --version "1"
+mechanize --version 1
