@@ -166,3 +166,24 @@ Rendering rescues/layout (not_found)
 
 Processing WayFinderController#find_way to xml (for 127.0.0.1 at 2010-02-19 17:24:41) [GET]
 Completed in 4647ms (View: 1, DB: 0) | 200 OK [http://localhost/way_finder/find_way.xml]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-19 17:41:53) [GET]
+
+ActionController::RoutingError (No route matches "/find_way/way_finder" with {:method=>:get}):
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing WayFinderController#find_way (for 127.0.0.1 at 2010-02-19 17:42:11) [GET]
+Completed in 3630ms (View: 1 | 200 OK [http://localhost/way_finder/find_way]
