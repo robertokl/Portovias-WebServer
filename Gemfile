@@ -1,1 +1,1 @@
-mechanize --version 1
+gem 'mechanize', '1.0.0'
