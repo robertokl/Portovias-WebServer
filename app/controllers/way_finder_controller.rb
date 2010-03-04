@@ -17,6 +17,6 @@ class WayFinderController < ApplicationController
       	end  	   
   	  end  
   	  render :text => response
-	  end
+	  end 
 	end
 end
