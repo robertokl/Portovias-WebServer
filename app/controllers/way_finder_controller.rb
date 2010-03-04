@@ -1,7 +1,7 @@
 class WayFinderController < ApplicationController
-	require "#{RAILS_ROOT}/lib/portovias.rb"
 	def find_way
-	  ways = find_best_way
+	  ways = Portovias.find_best_way unless params[:id]
+	  ways = Portovias.find_best_way(params[:id]) if params[:id]
     response = ""
 	  respond_to do |format|
   	  format.html do
