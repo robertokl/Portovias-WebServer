@@ -1,22 +1,22 @@
 class WayFinderController < ApplicationController
-	def find_way
-	  ways = Portovias.find_best_way unless params[:id]
-	  ways = Portovias.find_best_way(params[:id]) if params[:id]
+  def find_way
+    ways = Portovias.find_best_way unless params[:id]
+    ways = Portovias.find_best_way(params[:id]) if params[:id]
     response = ""
-	  respond_to do |format|
-  	  format.html do
-       	ways.keys.each do |key|
-       		response << "<h4>#{key}</h4>"
-       		response << "#{ways[key][1]}: #{ways[key][0]}<p/>"
-       	end
-  	  end
-  	  format.xml do
-      	ways.keys.each do |key|
-      		response << "#{key}\n"
-      		response << "#{ways[key][1]}: #{ways[key][0]}\n\n"
-      	end  	   
-  	  end  
-  	  render :text => response
-	  end 
-	end
+    respond_to do |format|
+      format.html do
+         ways.keys.each do |key|
+           response << "<h4>#{key}</h4>"
+           response << "#{ways[key][1]}: #{ways[key][0]}<p/>"
+         end
+      end
+      format.xml do
+        ways.keys.each do |key|
+          response << "#{key}\n"
+          response << "#{ways[key][1]}: #{ways[key][0]}\n\n"
+        end       
+      end  
+      render :text => response
+    end 
+  end
 end

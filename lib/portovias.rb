@@ -2,7 +2,7 @@ require 'mechanize'
 
 class Portovias
   CREDENTIALS = {"robertokl@gmail.com" => "300688", "vinicius@sordido.com.br" => "achador"}
-  INVALID_CHARACTERES = ["\240","\r","\n", " ", "<p/>", "<h4>", "</h4>"]
+  INVALID_CHARACTERES = ["\240","\r","\n", " "]
   SPECIAL_CHARACTER = "\273"
   
   def self.find_best_way(login = "robertokl@gmail.com")
@@ -31,6 +31,9 @@ class Portovias
   def self.format_trim(text)
     INVALID_CHARACTERES.each { |ic| text = text.gsub(ic, "") }
     text = text.gsub(SPECIAL_CHARACTER, " > ")
+    text = text[0..(text =~ /\(partin/) - 1] if text =~ /partindo/
+    text = text[1..text.length] if text =~ /\302/m
+    text = text[0..(text =~ /\302/) - 1] + text[(text =~ /\302/) + 1..text.length] if text =~ /\302/m
     return text
   end
 end
