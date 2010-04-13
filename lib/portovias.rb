@@ -2,27 +2,35 @@ require 'mechanize'
 
 class Portovias
   CREDENTIALS = {"robertokl@gmail.com" => "300688", "vinicius@sordido.com.br" => "achador"}
+  INVALID_CHARACTERES = ["\240","\r","\n", " ", "<p/>", "<h4>", "</h4>"]
+  SPECIAL_CHARACTER = "\273"
   
   def self.find_best_way(login = "robertokl@gmail.com")
-  	agent = Mechanize.new
-  	agent.get("https://wwws.portovias.com.br/PortalPortoVias/aspx/welcome.aspx")
-  	agent.page.forms.first.send("ctl00$ctl00$ContentGeral$ContentPrincipal$txtUsuario", login)
-  	agent.page.forms.first.send("ctl00$ctl00$ContentGeral$ContentPrincipal$txtSenha", Portovias::CREDENTIALS[login])
-  	agent.page.forms.first.click_button
-  	agent.get("https://wwws.portovias.com.br/portalportovias/aspx/meusTrajetos.aspx")
-  	faster = {}
-  	(1..50).each do |i|
-  		th = agent.page.search("//*[@id='ctl00_ctl00_ContentGeral_ContentPrincipal_rptTrajetos_ctl%.2d_nomeTrajeto']" % i)
-  		unless th.empty?
-  			f = {}
-  			(0..49).each do |j|
-  				c = agent.page.search("//*[@id='ctl00_ctl00_ContentGeral_ContentPrincipal_rptTrajetos_ctl%.2d_rptCaminhos_ctl%.2d_nomeCaminho']" % [i, j])
-  				t = agent.page.search("//*[@id='ctl00_ctl00_ContentGeral_ContentPrincipal_rptTrajetos_ctl%.2d_rptCaminhos_ctl%.2d_tempoEstimado']" % [i, j])
-  				f.merge!({t.text => c.text}) unless c.empty?
-  			end
-  			faster.merge!({th.text => [f.keys.sort.first, f[f.keys.sort.first]]})
-  		end
-  	end
-  	return faster
+    agent = Mechanize.new
+    agent.get("https://wwws.portovias.com.br/PortalPortoVias/aspx/welcome.aspx")
+    agent.page.forms.first.send("ctl00$ContentGeral$txtUsuario", login)
+    agent.page.forms.first.send("ctl00$ContentGeral$txtSenha", '300688')#Portovias::CREDENTIALS[login])
+    agent.page.forms.first.click_button
+    agent.get("https://wwws.portovias.com.br/portalportovias/aspx/meusTrajetos.aspx")
+    faster = {}
+    (1..50).each do |i|
+      th = agent.page.search("//*[@id='%d' and @class='trajeto']//th" % i).first
+      if th
+        f = {}
+        c = agent.page.search("//table[@id='#{i}' and @class='trajeto']//tr[@class='caminhos']//div[@class='showName']")#//*[@id='%d' and @class='trajeto']//th[@class='']" % i)#"//*[@id='ctl00_ctl00_ContentGeral_ContentPrincipal_rptTrajetos_ctl%.2d_rptCaminhos_ctl%.2d_nomeCaminho']" % [i, j])
+        t = agent.page.search("//table[@id='#{i}' and @class='trajeto']//tr[@class='caminhos']//td[3]")#("//table[@id=1 and @class='trajeto']//tr[@class='caminhos']//div[@class='showName']")#"//*[@id='ctl00_ctl00_ContentGeral_ContentPrincipal_rptTrajetos_ctl%.2d_rptCaminhos_ctl%.2d_tempoEstimado']" % [i, j])
+        (0..(c.size - 1)).each do |j|
+          f.merge!({format_trim(t[j].text) => format_trim(c[j].text)})
+        end
+        faster.merge!({format_trim(th.text) => [f.keys.sort.first, f[f.keys.sort.first]]})
+      end
+    end
+    return faster
   end  
+
+  def self.format_trim(text)
+    INVALID_CHARACTERES.each { |ic| text = text.gsub(ic, "") }
+    text = text.gsub(SPECIAL_CHARACTER, " > ")
+    return text
+  end
 end
