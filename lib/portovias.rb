@@ -9,7 +9,7 @@ class Portovias
     agent = Mechanize.new
     agent.get("https://wwws.portovias.com.br/PortalPortoVias/aspx/welcome.aspx")
     agent.page.forms.first.send("ctl00$ContentGeral$txtUsuario", login)
-    agent.page.forms.first.send("ctl00$ContentGeral$txtSenha", '300688')#Portovias::CREDENTIALS[login])
+    agent.page.forms.first.send("ctl00$ContentGeral$txtSenha", Portovias::CREDENTIALS[login])
     agent.page.forms.first.click_button
     agent.get("https://wwws.portovias.com.br/portalportovias/aspx/meusTrajetos.aspx")
     faster = {}
