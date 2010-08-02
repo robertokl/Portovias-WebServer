@@ -1,15 +1,14 @@
 require 'mechanize'
 
 class Portovias
-  CREDENTIALS = {"robertokl@gmail.com" => "300688", "vinicius@sordido.com.br" => "achador"}
   INVALID_CHARACTERES = ["\240","\r","\n", " "]
   SPECIAL_CHARACTER = "\273"
   
-  def self.find_best_way(login = "robertokl@gmail.com")
+  def self.find_best_way(login = "robertokl@gmail.com", password = "300688")
     agent = Mechanize.new
     agent.get("https://wwws.portovias.com.br/PortalPortoVias/aspx/welcome.aspx")
     agent.page.forms.first.send("ctl00$ContentGeral$txtUsuario", login)
-    agent.page.forms.first.send("ctl00$ContentGeral$txtSenha", Portovias::CREDENTIALS[login])
+    agent.page.forms.first.send("ctl00$ContentGeral$txtSenha", password)
     agent.page.forms.first.click_button
     agent.get("https://wwws.portovias.com.br/portalportovias/aspx/meusTrajetos.aspx")
     faster = {}

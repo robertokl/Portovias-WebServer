@@ -1,7 +1,7 @@
 class WayFinderController < ApplicationController
   def find_way
-    ways = Portovias.find_best_way unless params[:id]
-    ways = Portovias.find_best_way(params[:id]) if params[:id]
+    ways = Portovias.find_best_way unless params[:login]
+    ways = Portovias.find_best_way(params[:login], params[:password]) if params[:login]
     response = ""
     respond_to do |format|
       format.html do
