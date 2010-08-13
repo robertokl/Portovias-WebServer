@@ -14,7 +14,7 @@ class WayFinderController < ApplicationController
       format.xml do
         ways.keys.each do |key|
           response << "#{key}\n"
-           response << "#{ways[key][1]}: #{ways[key][0]}\n"
+           response << "#{ways[key][0][1]}: #{ways[key][0][0]}\n"
            response << "#{ways[key][1][1]}: #{ways[key][1][0]}\n\n"
         end       
       end  
