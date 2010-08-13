@@ -21,7 +21,8 @@ class Portovias
         (0..(c.size - 1)).each do |j|
           f.merge!({format_trim(t[j].text) => format_trim(c[j].text)})
         end
-        faster.merge!({format_trim(th.text) => [f.keys.sort.first, f[f.keys.sort.first]]})
+        #faster.merge!({format_trim(th.text) => [f.keys.sort.first, f[f.keys.sort.first]]})
+        faster.merge!({format_trim(th.text) => [[f.keys.sort.first, f[f.keys.sort.first]], [f.keys.sort[1], f[f.keys.sort[1]]]]})
       end
     end
     return faster

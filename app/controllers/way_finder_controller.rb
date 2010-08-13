@@ -7,13 +7,15 @@ class WayFinderController < ApplicationController
       format.html do
          ways.keys.each do |key|
            response << "<h4>#{key}</h4>"
-           response << "#{ways[key][1]}: #{ways[key][0]}<p/>"
+           response << "#{ways[key][0][1]}: #{ways[key][0][0]}<p/>"
+           response << "#{ways[key][1][1]}: #{ways[key][1][0]}<p/>"
          end
       end
       format.xml do
         ways.keys.each do |key|
           response << "#{key}\n"
-          response << "#{ways[key][1]}: #{ways[key][0]}\n\n"
+           response << "#{ways[key][1]}: #{ways[key][0]}\n"
+           response << "#{ways[key][1][1]}: #{ways[key][1][0]}\n\n"
         end       
       end  
       render :text => response
