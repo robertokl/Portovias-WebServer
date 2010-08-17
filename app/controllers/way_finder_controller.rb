@@ -5,20 +5,23 @@ class WayFinderController < ApplicationController
     response = ""
     respond_to do |format|
       format.html do
-         ways.keys.each do |key|
-           response << "<h4>#{key}</h4>"
-           response << "#{ways[key][0][1]}: #{ways[key][0][0]}<p/>"
-           response << "#{ways[key][1][1]}: #{ways[key][1][0]}<p/>"
-         end
+        response << build_response(ways)
       end
       format.xml do
-        ways.keys.each do |key|
-          response << "#{key}\n"
-           response << "#{ways[key][0][1]}: #{ways[key][0][0]}\n"
-           response << "#{ways[key][1][1]}: #{ways[key][1][0]}\n\n"
-        end       
+        response <<  build_response(ways, "%s\n", "\n")
       end  
       render :text => response
     end 
+  end
+  
+  private
+  def build_response(ways, header = "<h4>%s</h4>", delimiter = "</br>")
+    response = ""
+    ways.keys.each do |key|
+      response << "#{header % key}"
+      response << "#{ways[key][0][1]}: #{ways[key][0][0]}min#{delimiter}"
+      response << "#{ways[key][1][1]}: #{ways[key][1][0]}min#{delimiter}#{delimiter}"
+    end
+    return response
   end
 end

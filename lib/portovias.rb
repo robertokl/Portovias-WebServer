@@ -19,7 +19,7 @@ class Portovias
         c = agent.page.search("//table[@id='#{i}' and @class='trajeto']//tr[@class='caminhos']//div[@class='showName']")#//*[@id='%d' and @class='trajeto']//th[@class='']" % i)#"//*[@id='ctl00_ctl00_ContentGeral_ContentPrincipal_rptTrajetos_ctl%.2d_rptCaminhos_ctl%.2d_nomeCaminho']" % [i, j])
         t = agent.page.search("//table[@id='#{i}' and @class='trajeto']//tr[@class='caminhos']//td[3]")#("//table[@id=1 and @class='trajeto']//tr[@class='caminhos']//div[@class='showName']")#"//*[@id='ctl00_ctl00_ContentGeral_ContentPrincipal_rptTrajetos_ctl%.2d_rptCaminhos_ctl%.2d_tempoEstimado']" % [i, j])
         (0..(c.size - 1)).each do |j|
-          f.merge!({format_trim(t[j].text) => format_trim(c[j].text)})
+          f.merge!({format_trim(t[j].text).gsub("min", "").to_i => format_trim(c[j].text)})
         end
         #faster.merge!({format_trim(th.text) => [f.keys.sort.first, f[f.keys.sort.first]]})
         faster.merge!({format_trim(th.text) => [[f.keys.sort.first, f[f.keys.sort.first]], [f.keys.sort[1], f[f.keys.sort[1]]]]})
